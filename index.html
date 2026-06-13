@@ -185,6 +185,11 @@
             color: var(--text-muted);
         }
 
+        .nav-center {
+            display: flex;
+            align-items: center;
+        }
+
         .nav-menu {
             display: flex;
             list-style: none;
@@ -202,6 +207,45 @@
 
         .nav-link:hover, .nav-link.active {
             color: var(--text-main);
+        }
+
+        /* CART & MOBILE TOGGLE ALIGNMENT */
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .nav-cart-btn {
+            position: relative;
+            color: var(--text-main);
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-cart-btn:hover {
+            color: var(--accent-green);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background-color: var(--accent-green);
+            color: var(--bg-pure);
+            font-size: 0.65rem;
+            font-weight: 700;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
         }
 
         .nav-toggle {
@@ -234,7 +278,6 @@
             min-height: calc(100vh - 72px);
             display: flex;
             align-items: center;
-            /* Premium image overlay blend */
             background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 1) 100%), url('image_b3d4c6.png') center top / cover no-repeat;
             position: relative;
         }
@@ -372,6 +415,88 @@
             color: var(--text-muted);
             font-size: 1rem;
             line-height: 1.5;
+        }
+
+        /* --- E-COMMERCE SHOP GRID --- */
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .product-card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-image-container {
+            width: 100%;
+            aspect-ratio: 4/5;
+            background-color: var(--box-bg);
+            border: 1px solid var(--line-subtle);
+            border-radius: 4px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-smooth);
+            filter: grayscale(80%);
+        }
+
+        .product-card:hover .product-image-container img {
+            filter: grayscale(0%);
+            transform: scale(1.03);
+        }
+
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .product-price {
+            font-family: var(--font-system);
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        .product-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .btn-add-cart {
+            width: 100%;
+            background: transparent;
+            border: 1px solid var(--line-subtle);
+            color: var(--text-main);
+            padding: 12px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            border-radius: 2px;
+        }
+
+        .btn-add-cart:hover {
+            border-color: var(--text-main);
+            background: var(--text-main);
+            color: var(--bg-pure);
         }
 
         /* --- UPCOMING EVENTS --- */
@@ -720,7 +845,7 @@
         }
 
         @media (max-width: 768px) {
-            .nav-menu {
+            .nav-center {
                 position: fixed;
                 top: 72px;
                 left: -100%;
@@ -730,11 +855,11 @@
                 flex-direction: column;
                 align-items: flex-start;
                 padding: 40px 6%;
-                gap: 32px;
                 transition: var(--transition-smooth);
                 border-top: 1px solid var(--line-subtle);
             }
-            .nav-menu.active { left: 0; }
+            .nav-center.active { left: 0; }
+            .nav-menu { flex-direction: column; gap: 32px; }
             .nav-toggle { display: block; }
             
             .container { padding: 80px 0; }
@@ -772,18 +897,27 @@
     <header class="navbar" id="cleanNavbar">
         <div class="nav-container">
             <a class="logo" onclick="routeToView('home')">Fitness<span>Cyborg</span></a>
-            <button class="nav-toggle" id="menuSwitcher" aria-label="Toggle Options Menu">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-            <nav>
-                <ul class="nav-menu" id="navInterface">
+            
+            <div class="nav-center" id="navInterface">
+                <ul class="nav-menu">
                     <li><a class="nav-link active" onclick="routeToView('home')">Home</a></li>
                     <li><a class="nav-link" onclick="routeToView('about')">About</a></li>
                     <li><a class="nav-link" onclick="routeToView('services')">Services</a></li>
                     <li><a class="nav-link" onclick="routeToView('gallery')">Gallery</a></li>
+                    <li><a class="nav-link" onclick="routeToView('shop')" style="color: var(--text-main); font-weight: 500;">Shop</a></li>
                     <li><a class="nav-link" onclick="routeToView('contact')">Contact</a></li>
                 </ul>
-            </nav>
+            </div>
+
+            <div class="nav-actions">
+                <a class="nav-cart-btn" onclick="routeToView('shop')" aria-label="Shopping Cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-badge" id="cartCounter">0</span>
+                </a>
+                <button class="nav-toggle" id="menuSwitcher" aria-label="Toggle Options Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -984,6 +1118,52 @@
         </section>
     </main>
 
+    <main id="shopView" class="page-view">
+        <section class="container">
+            <div class="section-meta">Apparel Line</div>
+            <h1 class="display-title" style="font-size: 4rem; margin-bottom: 24px;">Performance Gear.</h1>
+            <p class="lead-paragraph" style="margin-bottom: 80px;">Engineered for movement. Technical manufacturing and premium fabrics powered by <strong>Defined Style</strong>. Strict minimalist aesthetic featuring precision chest-placed insignia—no clutter.</p>
+            
+            <div class="shop-grid">
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&q=80&w=600" alt="Core Performance Tee">
+                    </div>
+                    <div class="product-meta">
+                        <h4 class="product-title">Core Performance Tee</h4>
+                        <span class="product-price">K350</span>
+                    </div>
+                    <p class="product-desc">Athletic stretch fit. Features the clean Cyborg logo strictly placed on the upper chest. Built for high-energy aerobics.</p>
+                    <button class="btn-add-cart" onclick="addToCart()">Add to Cart</button>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&q=80&w=600" alt="Cyborg Training Hoodie">
+                    </div>
+                    <div class="product-meta">
+                        <h4 class="product-title">Training Hoodie</h4>
+                        <span class="product-price">K600</span>
+                    </div>
+                    <p class="product-desc">Heavyweight cotton blend engineered by Defined Style. Minimalist aesthetic with subtle central branding.</p>
+                    <button class="btn-add-cart" onclick="addToCart()">Add to Cart</button>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1571945153237-4929e783af4a?auto=format&fit=crop&q=80&w=600" alt="Tactical Compression Shirt">
+                    </div>
+                    <div class="product-meta">
+                        <h4 class="product-title">Compression Base</h4>
+                        <span class="product-price">K450</span>
+                    </div>
+                    <p class="product-desc">Tactical base layer for outdoor bootcamps. Moisture-wicking technology with a sleek chest crest.</p>
+                    <button class="btn-add-cart" onclick="addToCart()">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
     <main id="galleryView" class="page-view">
         <section class="container">
             <div class="section-meta">Archive</div>
@@ -1079,6 +1259,7 @@
                         <li><a onclick="routeToView('about')">About</a></li>
                         <li><a onclick="routeToView('services')">Services</a></li>
                         <li><a onclick="routeToView('gallery')">Gallery</a></li>
+                        <li><a onclick="routeToView('shop')">Apparel Shop</a></li>
                         <li><a onclick="routeToView('contact')">Contact</a></li>
                     </ul>
                 </div>
@@ -1152,20 +1333,24 @@
         const slides = document.querySelectorAll('.quote-slide');
         let currentPointer = 0;
 
-        bulletsArea.innerHTML = '';
-        slides.forEach((_, step) => {
-            const genericDot = document.createElement('div');
-            genericDot.classList.add('bullet-dot');
-            if(step === 0) genericDot.classList.add('active');
-            genericDot.addEventListener('click', () => slideShiftTo(step));
-            bulletsArea.appendChild(genericDot);
-        });
+        if (bulletsArea) {
+            bulletsArea.innerHTML = '';
+            slides.forEach((_, step) => {
+                const genericDot = document.createElement('div');
+                genericDot.classList.add('bullet-dot');
+                if(step === 0) genericDot.classList.add('active');
+                genericDot.addEventListener('click', () => slideShiftTo(step));
+                bulletsArea.appendChild(genericDot);
+            });
+        }
 
         const dotReferences = document.querySelectorAll('.bullet-dot');
 
         function slideShiftTo(indexPosition) {
             currentPointer = indexPosition;
-            track.style.transform = `translateX(-${indexPosition * 100}%)`;
+            if(track) {
+                track.style.transform = `translateX(-${indexPosition * 100}%)`;
+            }
             dotReferences.forEach(d => d.classList.remove('active'));
             if(dotReferences[indexPosition]) {
                 dotReferences[indexPosition].classList.add('active');
@@ -1173,8 +1358,10 @@
         }
 
         setInterval(() => {
-            currentPointer = (currentPointer + 1) % slides.length;
-            slideShiftTo(currentPointer);
+            if(slides.length > 0) {
+                currentPointer = (currentPointer + 1) % slides.length;
+                slideShiftTo(currentPointer);
+            }
         }, 5000);
 
         /* --- ARCHIVE FILTER LOGIC --- */
@@ -1196,6 +1383,17 @@
                     el.style.display = 'none';
                 }
             });
+        }
+
+        /* --- BASIC CART MECHANICS --- */
+        let cartItems = 0;
+        function addToCart() {
+            cartItems++;
+            document.getElementById('cartCounter').innerText = cartItems;
+            // Visual feedback animation
+            const badge = document.getElementById('cartCounter');
+            badge.style.transform = 'scale(1.5)';
+            setTimeout(() => badge.style.transform = 'scale(1)', 200);
         }
 
         /* --- FORM SUBMISSION --- */
