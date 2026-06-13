@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FITNESS CYBORG | Reprogram Your Limits</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- MINIMALIST ARCHITECTURE --- */
+        :root {
+            --bg-pure: #000000;
+            --bg-neutral: #0a0a0a;
+            --accent-green: #00ff66;
+            --text-main: #ffffff;
+            --text-muted: #6e6e73;
+            --text-ghost: #2c2c2e;
+            --line-subtle: #1c1c1e;
+            --box-bg: #0d0d0e;
+            --font-system: 'Inter', -apple-system, sans-serif;
+            --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-pure);
+            color: var(--text-main);
+            font-family: var(--font-system);
+            font-size: 1rem;
+            line-height: 1.6;
+            letter-spacing: -0.022em;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- LAYOUT UTILITIES --- */
+        .container {
+            width: 88%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 120px 0;
+        }
+
+        .hairline-divider {
+            width: 100%;
+            height: 1px;
+            background-color: var(--line-subtle);
+        }
+
+        .section-meta {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-meta::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent-green);
+            border-radius: 50%;
+        }
+
+        .display-title {
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+            margin-bottom: 24px;
+        }
+
+        .lead-paragraph {
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            line-height: 1.5;
+            max-width: 600px;
+            font-weight: 400;
+        }
+
+        /* ULTRA CLEAN BUTTONS */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 28px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            border: none;
+            width: fit-content;
+        }
+
+        .btn-black {
+            background: var(--text-main);
+            color: var(--bg-pure);
+            border-radius: 4px;
+        }
+
+        .btn-black:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .btn-link {
+            background: transparent;
+            color: var(--text-main);
+            padding: 12px 0;
+            position: relative;
+        }
+
+        .btn-link::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--text-main);
+            transition: var(--transition-smooth);
+        }
+
+        .btn-link:hover::after {
+            width: 0%;
+        }
+
+        /* --- NAVIGATION & PREMIUM LOGO LAYOUT --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: var(--transition-smooth);
+        }
+
+        .navbar.scrolled {
+            border-bottom: 1px solid var(--line-subtle);
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .nav-container {
+            width: 88%;
+            max-width: 1100px;
+            margin: 0 auto;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 1rem;
+            text-decoration: none;
+            color: var(--text-main);
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .logo span {
+            font-weight: 300;
+            color: var(--text-muted);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--text-main);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* --- SINGLE PAGE APP ROUTER --- */
+        .page-view {
+            display: none;
+            padding-top: 72px;
+            animation: viewReveal 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .page-view.active-view {
+            display: block;
+        }
+
+        @keyframes viewReveal {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* --- HOME MODULE --- */
+        .hero-section {
+            min-height: calc(100vh - 72px);
+            display: flex;
+            align-items: center;
+            /* Premium image overlay blend */
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 1) 100%), url('image_b3d4c6.png') center top / cover no-repeat;
+            position: relative;
+        }
+
+        .hero-layout {
+            width: 88%;
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            padding: 80px 0;
+        }
+
+        .hero-title {
+            font-size: 5rem;
+            font-weight: 700;
+            line-height: 1.02;
+            letter-spacing: -0.05em;
+            margin-bottom: 32px;
+        }
+
+        .hero-subtitle {
+            color: var(--text-muted);
+            font-size: 1.4rem;
+            max-width: 680px;
+            margin-bottom: 48px;
+            font-weight: 400;
+            line-height: 1.45;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            margin-bottom: 100px;
+        }
+
+        .hero-stats-row {
+            display: flex;
+            gap: 80px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 40px;
+        }
+
+        .stat-node h3 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            margin-bottom: 2px;
+        }
+
+        .stat-node p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* --- SPLIT BRIEFING ARCHITECTURE --- */
+        .split-briefing {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .briefing-image-side {
+            width: 100%;
+            aspect-ratio: 1/1;
+            overflow: hidden;
+            border-radius: 4px;
+            background-color: var(--bg-neutral);
+        }
+
+        .briefing-image-side img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: var(--transition-smooth);
+        }
+
+        .split-briefing:hover .briefing-image-side img {
+            filter: grayscale(0%);
+        }
+
+        .briefing-content h3 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            letter-spacing: -0.03em;
+        }
+
+        .briefing-content p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        /* --- MODERN PREMIUM SERVICE BOX SYSTEM --- */
+        .premium-box-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .service-box {
+            background-color: var(--box-bg);
+            border: 1px solid var(--line-subtle);
+            border-radius: 8px;
+            padding: 40px;
+            transition: var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .service-box:hover {
+            border-color: var(--text-muted);
+            background-color: #111112;
+            transform: translateY(-2px);
+        }
+
+        .service-box h3 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+            color: var(--text-main);
+        }
+
+        .service-box p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        /* --- UPCOMING EVENTS --- */
+        .minimal-events-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+
+        .clean-event-card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .clean-event-image {
+            width: 100%;
+            aspect-ratio: 16/10;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 24px;
+            filter: grayscale(100%);
+            transition: var(--transition-smooth);
+        }
+
+        .clean-event-card:hover .clean-event-image {
+            filter: grayscale(0%);
+        }
+
+        .clean-event-card h3 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            margin-bottom: 12px;
+        }
+
+        .clean-event-card p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 24px;
+            flex-grow: 1;
+        }
+
+        .clean-spec-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 0.95rem;
+            border-top: 1px solid var(--line-subtle);
+            padding-top: 16px;
+            color: var(--text-muted);
+        }
+
+        .clean-spec-list span {
+            color: var(--text-main);
+        }
+
+        /* --- FIXED TESTIMONIAL VIEWPORT --- */
+        .minimal-quote-box {
+            max-width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-viewport {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .quote-track {
+            display: flex;
+            width: 100%;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .quote-slide {
+            min-width: 100%;
+            width: 100%;
+            flex-shrink: 0;
+            box-sizing: border-box;
+        }
+
+        .quote-text {
+            font-size: 1.8rem;
+            font-weight: 400;
+            line-height: 1.4;
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+            word-wrap: break-word;
+        }
+
+        .quote-user {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+        }
+
+        .quote-bullets {
+            display: flex;
+            gap: 12px;
+            margin-top: 40px;
+        }
+
+        .bullet-dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--text-ghost);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .bullet-dot.active {
+            background: var(--text-main);
+            transform: scale(1.5);
+        }
+
+        /* --- GALLERY ARTIFACTS --- */
+        .filter-strip {
+            display: flex;
+            gap: 32px;
+            margin-bottom: 48px;
+            border-bottom: 1px solid var(--line-subtle);
+            padding-bottom: 16px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .filter-strip::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-trigger {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            padding-bottom: 16px;
+            position: relative;
+            top: 1px;
+        }
+
+        .filter-trigger.active, .filter-trigger:hover {
+            color: var(--text-main);
+        }
+
+        .gallery-asymmetric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 32px;
+        }
+
+        .gallery-photo-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .gallery-photo-container {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background-color: var(--bg-neutral);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-ghost);
+            transition: var(--transition-smooth);
+        }
+
+        .gallery-photo-wrapper:hover .gallery-photo-container {
+            background-color: #121214;
+            color: var(--text-muted);
+        }
+
+        .gallery-photo-wrapper h4 {
+            font-size: 1.05rem;
+            font-weight: 500;
+        }
+
+        .gallery-photo-wrapper p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: -8px;
+        }
+
+        /* --- CONTACT MODULE --- */
+        .contact-split-view {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+        }
+
+        .info-directory {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .directory-block h4 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .directory-block p {
+            font-size: 1.4rem;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+        }
+
+        .minimal-socials {
+            display: flex;
+            gap: 24px;
+            margin-top: 20px;
+            list-style: none;
+        }
+
+        .minimal-socials a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: var(--transition-smooth);
+        }
+
+        .minimal-socials a:hover {
+            color: var(--text-main);
+        }
+
+        /* Form Controls */
+        .clean-form-element {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .clean-input-box {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--line-subtle);
+            padding: 12px 0;
+            color: var(--text-main);
+            font-family: var(--font-system);
+            font-size: 1rem;
+            width: 100%;
+            transition: var(--transition-smooth);
+            border-radius: 0;
+        }
+
+        .clean-input-box:focus {
+            outline: none;
+            border-bottom-color: var(--text-main);
+        }
+
+        textarea.clean-input-box {
+            min-height: 100px;
+            resize: none;
+        }
+
+        /* --- FOOTER --- */
+        .minimal-footer {
+            background: var(--bg-pure);
+            padding: 100px 0 60px 0;
+        }
+
+        .footer-top-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            margin-top: 16px;
+            max-width: 400px;
+            font-size: 1.05rem;
+        }
+
+        .footer-index-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-index-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+
+        .footer-index-links a:hover {
+            color: var(--text-main);
+        }
+
+        .footer-bottom-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #3a3a3c;
+            font-size: 0.85rem;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        /* Minimal Float Utility */
+        .float-comm-trigger {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-main);
+            text-decoration: none;
+            background: var(--bg-neutral);
+            border: 1px solid var(--line-subtle);
+            padding: 12px 20px;
+            border-radius: 4px;
+            z-index: 999;
+            transition: var(--transition-smooth);
+        }
+
+        .float-comm-trigger:hover {
+            background: var(--text-main);
+            color: var(--bg-pure);
+            border-color: var(--text-main);
+        }
+
+        /* --- RESPONSIVE PIPELINES (MOBILE FIRST FIXES) --- */
+        @media (max-width: 1024px) {
+            .hero-title { font-size: 3.8rem; }
+            .split-briefing, .minimal-events-grid, .contact-split-view {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+            .footer-top-row { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 72px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 72px);
+                background: var(--bg-pure);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 40px 6%;
+                gap: 32px;
+                transition: var(--transition-smooth);
+                border-top: 1px solid var(--line-subtle);
+            }
+            .nav-menu.active { left: 0; }
+            .nav-toggle { display: block; }
+            
+            .container { padding: 80px 0; }
+            
+            .hero-title { font-size: 2.8rem; }
+            .hero-subtitle { font-size: 1.15rem; margin-bottom: 30px; }
+            .display-title { font-size: 2.2rem; }
+            
+            .hero-actions { 
+                flex-direction: column; 
+                align-items: flex-start; 
+                gap: 16px; 
+                margin-bottom: 60px; 
+            }
+            
+            .hero-stats-row { 
+                flex-wrap: wrap; 
+                gap: 30px; 
+            }
+            
+            .quote-text { font-size: 1.4rem; }
+            .directory-block p { font-size: 1.1rem; }
+            
+            .float-comm-trigger {
+                bottom: 20px;
+                right: 20px;
+                font-size: 0.75rem;
+                padding: 10px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar" id="cleanNavbar">
+        <div class="nav-container">
+            <a class="logo" onclick="routeToView('home')">Fitness<span>Cyborg</span></a>
+            <button class="nav-toggle" id="menuSwitcher" aria-label="Toggle Options Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <nav>
+                <ul class="nav-menu" id="navInterface">
+                    <li><a class="nav-link active" onclick="routeToView('home')">Home</a></li>
+                    <li><a class="nav-link" onclick="routeToView('about')">About</a></li>
+                    <li><a class="nav-link" onclick="routeToView('services')">Services</a></li>
+                    <li><a class="nav-link" onclick="routeToView('gallery')">Gallery</a></li>
+                    <li><a class="nav-link" onclick="routeToView('contact')">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="homeView" class="page-view active-view">
+        <section class="hero-section">
+            <div class="hero-layout">
+                <h1 class="hero-title">Reprogram <br>your limits.</h1>
+                <p class="hero-subtitle">High-energy fitness experiences built to inspire movement, discipline, confidence, and community through aerobics, group workouts, and live fitness events.</p>
+                <div class="hero-actions">
+                    <button class="btn btn-black" onclick="routeToView('contact')">Join a session</button>
+                    <a class="btn btn-link" href="#scheduled-events">Upcoming events</a>
+                </div>
+                <div class="hero-stats-row">
+                    <div class="stat-node">
+                        <h3>500+</h3>
+                        <p>Participants</p>
+                    </div>
+                    <div class="stat-node">
+                        <h3>50+</h3>
+                        <p>Live Sessions</p>
+                    </div>
+                    <div class="stat-node">
+                        <h3>Driven</h3>
+                        <p>By Community</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="hairline-divider"></div>
+
+        <section class="container">
+            <div class="split-briefing">
+                <div class="briefing-image-side">
+                    <img src="image-2.jpeg" alt="Fitness Training Core Overview Image">
+                </div>
+                <div class="briefing-content">
+                    <div class="section-meta" style="margin-bottom: 10px;">Overview</div>
+                    <h3>Who is Fitness Cyborg?</h3>
+                    <p>Fitness Cyborg is a dynamic fitness brand led by <strong>Makungo Muyembe</strong>, focused on bringing energy, motivation, and movement to communities through aerobics, group fitness, outdoor training, and live wellness events.</p>
+                    <p>More than just workouts, Fitness Cyborg creates experiences that combine music, movement, discipline, and positive energy to help people stay active, confident, and connected.</p>
+                    <button class="btn btn-link" onclick="routeToView('about')">Learn more about our culture</button>
+                </div>
+            </div>
+        </section>
+
+        <div class="hairline-divider"></div>
+
+        <section class="container">
+            <div class="section-meta">Capabilities</div>
+            <div class="display-title" style="margin-bottom: 60px;">What we do.</div>
+            <div class="premium-box-grid">
+                <div class="service-box">
+                    <h3>Aerobics Sessions</h3>
+                    <p>Fun and energetic aerobics sessions designed to improve movement, endurance, coordination, and overall fitness in an exciting group environment.</p>
+                </div>
+                <div class="service-box">
+                    <h3>Group Fitness Training</h3>
+                    <p>Interactive group workouts that encourage motivation, teamwork, consistency, and physical activity for all fitness levels.</p>
+                </div>
+                <div class="service-box">
+                    <h3>Student Fitness Events</h3>
+                    <p>High-energy fitness experiences designed for schools, colleges, and youth communities through organized fitness activities and live workout sessions.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="hairline-divider"></div>
+
+        <section class="container" id="scheduled-events">
+            <div class="section-meta">Schedule</div>
+            <div class="display-title" style="margin-bottom: 60px;">Upcoming events.</div>
+            <div class="minimal-events-grid">
+                <div class="clean-event-card">
+                    <img src="image-2.jpeg" class="clean-event-image" alt="Students Friday Night Aerobics Mania">
+                    <h3>Students Friday Night Aerobics Mania</h3>
+                    <p>An exciting evening of music, movement, aerobics, and pure fitness energy designed for students and young fitness enthusiasts.</p>
+                    <ul class="clean-spec-list">
+                        <li>Date: <span>Friday, 12th June</span></li>
+                        <li>Time: <span>17:00hrs to 19:00hrs</span></li>
+                        <li>Venue: <span>Monk Square</span></li>
+                        <li>Entry: <span>Free For All</span></li>
+                    </ul>
+                </div>
+                <div class="clean-event-card">
+                    <img src="image-3.jpeg" class="clean-event-image" alt="Community Fitness Bootcamp">
+                    <h3>Community Fitness Bootcamp</h3>
+                    <p>Join an energetic outdoor workout experience focused on movement, motivation, teamwork, and healthy living.</p>
+                    <ul class="clean-spec-list">
+                        <li>Date: <span>To Be Announced</span></li>
+                        <li>Location: <span>Lusaka, Zambia</span></li>
+                        <li>Access: <span>Open Registration</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <div class="hairline-divider"></div>
+
+        <section class="container">
+            <div class="minimal-quote-box">
+                <div class="quote-viewport">
+                    <div class="quote-track" id="quoteTrackSystem">
+                        <div class="quote-slide">
+                            <p class="quote-text">“Fitness Cyborg sessions are full of energy and motivation. Every event feels exciting and inspiring.”</p>
+                            <div class="quote-user">— Fleet Participant</div>
+                        </div>
+                        <div class="quote-slide">
+                            <p class="quote-text">“The atmosphere, music, and workouts create an amazing fitness experience for everyone involved.”</p>
+                            <div class="quote-user">— Community Representative</div>
+                        </div>
+                        <div class="quote-slide">
+                            <p class="quote-text">“Fitness Cyborg brings people together through movement, positivity, and community fitness.”</p>
+                            <div class="quote-user">— Student Organizer</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="quote-bullets" id="quoteBulletsSystem"></div>
+            </div>
+        </section>
+
+        <div class="hairline-divider"></div>
+
+        <section class="container" style="text-align: center; padding: 140px 0;">
+            <div class="display-title">Ready to move?</div>
+            <p style="color: var(--text-muted); max-width: 550px; margin: 0 auto 40px auto; font-size: 1.2rem;">Join the Fitness Cyborg movement and experience powerful group fitness sessions, aerobics events, and energetic wellness activities.</p>
+            <div style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;">
+                <button class="btn btn-black" onclick="routeToView('contact')">Book a session</button>
+                <button class="btn btn-link" onclick="routeToView('contact')">Contact administration</button>
+            </div>
+        </section>
+    </main>
+
+    <main id="aboutView" class="page-view">
+        <section class="container">
+            <div class="section-meta">Dossier</div>
+            <h1 class="display-title" style="font-size: 4rem; margin-bottom: 60px;">About us.</h1>
+            
+            <div class="split-briefing" style="margin-bottom: 100px;">
+                <div class="briefing-image-side">
+                    <img src="image-4.jpeg" alt="Athletic training profile on About page">
+                </div>
+                <div class="briefing-content" style="font-size: 1.1rem; color: var(--text-muted); line-height: 1.7;">
+                    <p style="margin-bottom: 24px;"><strong style="color: var(--text-main); font-weight: 500;">Fitness Cyborg</strong> is a modern fitness movement focused on inspiring active lifestyles through high-energy aerobics, group workouts, outdoor fitness activities, and live fitness events.</p>
+                    <p style="margin-bottom: 24px;">Founded by <strong style="color: var(--text-main); font-weight: 500;">Makungo Muyembe</strong>, the brand was created to encourage people of all ages to embrace movement, discipline, confidence, and positive energy through engaging fitness experiences.</p>
+                    <p style="margin-bottom: 24px;">Fitness Cyborg combines fitness, music, motivation, and community interaction to create exciting workout environments that promote wellness and personal growth.</p>
+                    <p>The mission is to build a strong fitness culture that motivates communities, students, organizations, and individuals to stay active and connected through movement.</p>
+                </div>
+            </div>
+
+            <div class="hairline-divider" style="margin-bottom: 80px;"></div>
+
+            <div class="minimal-events-grid">
+                <div>
+                    <h3 style="font-size: 1.4rem; font-weight: 600; margin-bottom: 16px;">Our Mission</h3>
+                    <p style="color: var(--text-muted); font-size: 1.1rem;">To inspire healthier and more active communities through energetic fitness experiences, motivation, discipline, and positive movement culture.</p>
+                </div>
+                <div>
+                    <h3 style="font-size: 1.4rem; font-weight: 600; margin-bottom: 16px;">Our Vision</h3>
+                    <p style="color: var(--text-muted); font-size: 1.1rem;">To become one of the leading community fitness brands promoting wellness, movement, and active living through innovative fitness experiences and events.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <main id="servicesView" class="page-view">
+        <section class="container">
+            <div class="section-meta">Catalog</div>
+            <h1 class="display-title" style="font-size: 4rem; margin-bottom: 24px;">Our services.</h1>
+            <p class="lead-paragraph" style="margin-bottom: 80px;">Fitness Cyborg offers exciting and energetic fitness experiences designed to promote movement, teamwork, discipline, and active living for individuals, schools, organizations, and communities.</p>
+            
+            <div class="premium-box-grid">
+                <div class="service-box">
+                    <h3>Aerobics Programs</h3>
+                    <p>High-energy aerobics sessions designed for fun, movement, endurance, and fitness engagement.</p>
+                </div>
+                <div class="service-box">
+                    <h3>Group Workout Sessions</h3>
+                    <p>Interactive group training sessions suitable for different fitness levels and environments.</p>
+                </div>
+                <div class="service-box">
+                    <h3>School Fitness Activations</h3>
+                    <p>Special fitness experiences designed for students and educational institutions.</p>
+                </div>
+                <div class="service-box">
+                    <h3>Corporate Wellness Activities</h3>
+                    <p>Professional wellness and fitness activities for companies and organizations.</p>
+                </div>
+                <div class="service-box">
+                    <h3>Outdoor Fitness Events</h3>
+                    <p>Dynamic outdoor fitness sessions combining energy, music, and movement.</p>
+                </div>
+                <div class="service-box">
+                    <h3>Fitness Event Hosting</h3>
+                    <p>Planning and leading engaging fitness events and community workout experiences.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <main id="galleryView" class="page-view">
+        <section class="container">
+            <div class="section-meta">Archive</div>
+            <h1 class="display-title" style="font-size: 4rem; margin-bottom: 60px;">Gallery.</h1>
+            
+            <div class="filter-strip">
+                <button class="filter-trigger active" onclick="filterArchive('all')">All Material</button>
+                <button class="filter-trigger" onclick="filterArchive('aerobics')">Aerobics</button>
+                <button class="filter-trigger" onclick="filterArchive('student')">Student events</button>
+                <button class="filter-trigger" onclick="filterArchive('outdoor')">Outdoor</button>
+                <button class="filter-trigger" onclick="filterArchive('community')">Community</button>
+            </div>
+
+            <div class="gallery-asymmetric-grid">
+                <div class="gallery-photo-wrapper" data-tag="aerobics">
+                    <div class="gallery-photo-container"><i class="fa-solid fa-plus"></i></div>
+                    <h4>Rhythm & Flow</h4>
+                    <p>High-energy aerobics sessions.</p>
+                </div>
+                <div class="gallery-photo-wrapper" data-tag="student">
+                    <div class="gallery-photo-container"><i class="fa-solid fa-plus"></i></div>
+                    <h4>Campus Activation</h4>
+                    <p>Student group session deployment.</p>
+                </div>
+                <div class="gallery-photo-wrapper" data-tag="outdoor">
+                    <div class="gallery-photo-container"><i class="fa-solid fa-plus"></i></div>
+                    <h4>Open Air Layout</h4>
+                    <p>Outdoor fitness coordination.</p>
+                </div>
+                <div class="gallery-photo-wrapper" data-tag="community">
+                    <div class="gallery-photo-container"><i class="fa-solid fa-plus"></i></div>
+                    <h4>Unified Assembly</h4>
+                    <p>Community workout experience panels.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <main id="contactView" class="page-view">
+        <section class="container">
+            <div class="section-meta">Channels</div>
+            <h1 class="display-title" style="font-size: 4rem; margin-bottom: 80px;">Contact.</h1>
+            
+            <div class="contact-split-view">
+                <div class="info-directory">
+                    <div class="directory-block">
+                        <h4>Telephone</h4>
+                        <p>0769 570 922 / 0574 184 164</p>
+                    </div>
+                    <div class="directory-block">
+                        <h4>Digital Postal</h4>
+                        <p>definedstyle@ymail.com</p>
+                    </div>
+                    <div class="directory-block">
+                        <h4>Coordinates</h4>
+                        <p>Lusaka, Zambia</p>
+                    </div>
+                    <div class="directory-block">
+                        <h4>Network Handles</h4>
+                        <ul class="minimal-socials">
+                            <li><a href="#">Facebook</a></li>
+                            <li><a href="#">Instagram</a></li>
+                            <li><a href="#">TikTok</a></li>
+                            <li><a href="#">YouTube</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <form class="clean-form-element" onsubmit="submitCleanTransmission(event)">
+                        <input type="text" class="clean-input-box" placeholder="Your Name" required>
+                        <input type="tel" class="clean-input-box" placeholder="Phone Number" required>
+                        <input type="email" class="clean-input-box" placeholder="Email Address" required>
+                        <input type="text" class="clean-input-box" placeholder="Subject" required>
+                        <textarea class="clean-input-box" placeholder="Message Payload Details" required></textarea>
+                        <button type="submit" class="btn btn-black" style="align-self: flex-start; margin-top: 20px;">Send transmission</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="minimal-footer">
+        <div class="container" style="padding: 0;">
+            <div class="footer-top-row">
+                <div class="footer-brand">
+                    <a class="logo" onclick="routeToView('home')">Fitness<span>Cyborg</span></a>
+                    <p>A high-performance community infrastructure centered around premium aerobics, mass group training metrics, and athletic optimization events.</p>
+                </div>
+                <div>
+                    <ul class="footer-index-links">
+                        <li><a onclick="routeToView('home')">Home</a></li>
+                        <li><a onclick="routeToView('about')">About</a></li>
+                        <li><a onclick="routeToView('services')">Services</a></li>
+                        <li><a onclick="routeToView('gallery')">Gallery</a></li>
+                        <li><a onclick="routeToView('contact')">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="hairline-divider" style="margin-bottom: 40px;"></div>
+            
+            <div class="footer-bottom-row">
+                <div>&copy; 2026 Fitness Cyborg. Directed by Makungo Muyembe.</div>
+                <div style="font-size: 0.75rem; letter-spacing: 0.1em; color: #fff;">MOVE WITH POWER ⚡</div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/260769570922" class="float-comm-trigger" target="_blank" rel="noopener noreferrer">
+        WhatsApp Communication
+    </a>
+
+    <script>
+        /* --- ROUTER SYSTEM --- */
+        function routeToView(viewId) {
+            const interfaceMenu = document.getElementById('navInterface');
+            const menuBtn = document.getElementById('menuSwitcher');
+            interfaceMenu.classList.remove('active');
+            menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+
+            const views = document.querySelectorAll('.page-view');
+            views.forEach(v => v.classList.remove('active-view'));
+
+            const target = document.getElementById(viewId + 'View');
+            if (target) {
+                target.classList.add('active-view');
+                window.scrollTo(0, 0);
+            }
+
+            const menuLinks = document.querySelectorAll('.nav-link');
+            menuLinks.forEach(link => {
+                if(link.getAttribute('onclick').includes(`'${viewId}'`)) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+
+        /* --- MOBILE MENU --- */
+        document.getElementById('menuSwitcher').addEventListener('click', function() {
+            const menu = document.getElementById('navInterface');
+            menu.classList.toggle('active');
+            
+            if(menu.classList.contains('active')) {
+                this.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+            } else {
+                this.innerHTML = '<i class="fa-solid fa-bars"></i>';
+            }
+        });
+
+        /* --- NAVBAR SCROLL EVENT --- */
+        window.addEventListener('scroll', function() {
+            const bar = document.getElementById('cleanNavbar');
+            if (window.scrollY > 30) {
+                bar.classList.add('scrolled');
+            } else {
+                bar.classList.remove('scrolled');
+            }
+        });
+
+        /* --- TESTIMONIAL SYSTEM MECHANICS --- */
+        const track = document.getElementById('quoteTrackSystem');
+        const bulletsArea = document.getElementById('quoteBulletsSystem');
+        const slides = document.querySelectorAll('.quote-slide');
+        let currentPointer = 0;
+
+        bulletsArea.innerHTML = '';
+        slides.forEach((_, step) => {
+            const genericDot = document.createElement('div');
+            genericDot.classList.add('bullet-dot');
+            if(step === 0) genericDot.classList.add('active');
+            genericDot.addEventListener('click', () => slideShiftTo(step));
+            bulletsArea.appendChild(genericDot);
+        });
+
+        const dotReferences = document.querySelectorAll('.bullet-dot');
+
+        function slideShiftTo(indexPosition) {
+            currentPointer = indexPosition;
+            track.style.transform = `translateX(-${indexPosition * 100}%)`;
+            dotReferences.forEach(d => d.classList.remove('active'));
+            if(dotReferences[indexPosition]) {
+                dotReferences[indexPosition].classList.add('active');
+            }
+        }
+
+        setInterval(() => {
+            currentPointer = (currentPointer + 1) % slides.length;
+            slideShiftTo(currentPointer);
+        }, 5000);
+
+        /* --- ARCHIVE FILTER LOGIC --- */
+        function filterArchive(tag) {
+            const triggers = document.querySelectorAll('.filter-trigger');
+            triggers.forEach(t => {
+                if(t.getAttribute('onclick').includes(`'${tag}'`)) {
+                    t.classList.add('active');
+                } else {
+                    t.classList.remove('active');
+                }
+            });
+
+            const elements = document.querySelectorAll('.gallery-photo-wrapper');
+            elements.forEach(el => {
+                if(tag === 'all' || el.getAttribute('data-tag') === tag) {
+                    el.style.display = 'flex';
+                } else {
+                    el.style.display = 'none';
+                }
+            });
+        }
+
+        /* --- FORM SUBMISSION --- */
+        function submitCleanTransmission(event) {
+            event.preventDefault();
+            alert('Transmission logged. We will connect with you shortly.');
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>
